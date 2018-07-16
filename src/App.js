@@ -7,6 +7,7 @@ import {
 import Header from './components/Header'
 import Footer from './components/Footer'
 import UserDashboard from './components/UserDashboard'
+import RoundTracker from './components/RoundTracker'
 import './App.css';
 
 class App extends Component {
@@ -26,6 +27,7 @@ class App extends Component {
           How it Solves this problem : Allows for a golfer to record their scores on a hole as well as notes on each shot or how they played the hole overall.These notes can be viewed later to help a golfer improve areas of their game round-to-round
         </p>
         <UserDashboard />
+        <RoundTracker />
         <Footer />
       </div>
     );
