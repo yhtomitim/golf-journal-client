@@ -1,17 +1,18 @@
 import React from 'react';
+import RoundTracker from './RoundTracker';
 
-const Dashboard = (props) => {
+const UserDashboard = () => {
   return (
     <section>
-      <h1>A User's stuff will show up here!</h1>
       <h3>Welcome Username Here</h3>
       <div className="Rounds-tracked">
         <article>latest round of golf</article>
         <article>other rounds of golf tracked</article>
       </div>
       <button>Start a New Round</button>
+      <RoundTracker />
     </section>
   )
 }
 
-export default Dashboard;
+export default UserDashboard;
