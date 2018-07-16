@@ -9,6 +9,7 @@ const Dashboard = (props) => {
         <article>latest round of golf</article>
         <article>other rounds of golf tracked</article>
       </div>
+      <button>Start a New Round</button>
     </section>
   )
 }
