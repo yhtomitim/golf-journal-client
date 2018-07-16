@@ -38,3 +38,10 @@
 .Rounds-tracked article {
    border: black 1px solid;
 }
+
+.Hole-form {
+  width: 200px;
+  display: flex;
+  align-items: center;
+  flex-flow: column nowrap;
+}

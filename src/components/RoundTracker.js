@@ -2,7 +2,7 @@ import React from 'react';
 
 const RoundTracker = (props) => {
   return (
-    <form>
+    <form className="Hole-form">
       <label htmlFor="hole">Select hole:</label>
       <select name="hole" id="">
         <option value="1">No. 1</option>
