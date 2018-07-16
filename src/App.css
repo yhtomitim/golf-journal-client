@@ -17,8 +17,14 @@
   font-size: 1.5em;
 }
 
+li {
+  list-style: none;
+}
+
 .App-intro {
   font-size: large;
+  width: 80%;
+  background-color: darkgray;
 }
 
 .App-footer {
@@ -26,7 +32,7 @@
   text-align: left;
   padding-left: 10px;
   position:fixed;
-  bottom:0;
+  bottom: 0;
   width:100%;
 }
 
@@ -40,7 +46,8 @@
 }
 
 .Hole-form {
-  width: 200px;
+  width: 400px;
+  background-color: antiquewhite;
   display: flex;
   align-items: center;
   flex-flow: column nowrap;
