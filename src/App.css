@@ -8,7 +8,7 @@
 
 .App-header {
   background-color: #222;
-  height: 300px;
+  height: 500px;
   padding: 20px;
   color: white;
 }
@@ -28,4 +28,13 @@
   position:fixed;
   bottom:0;
   width:100%;
+}
+
+.Rounds-tracked {
+  display: flex;
+  justify-content: space-around;
+}
+
+.Rounds-tracked article {
+   border: black 1px solid;
 }
