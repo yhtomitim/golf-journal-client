@@ -76,9 +76,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   />
 );
 
-const Public = () => <h3>Public Page</h3>;
-const Protected = () => <h3>Protected</h3>;
-
 class Login extends React.Component {
   state = {
     redirectToReferrer: false
