@@ -21,7 +21,7 @@ class RoundTracker extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    alert(`the hole you selected is: ${this.state}`);
+    alert(`the data you entered is: hole: ${this.state.hole} par: ${this.state.par} score: ${this.state.score} notes: ${this.state.notes}` );
   }
 
   render() {
