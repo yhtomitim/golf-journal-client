@@ -9,7 +9,7 @@ class RoundTracker extends React.Component {
       score: '',
       notes: '',
       round_id: '6' //no snakeCase to match a foreign key column in the table hole
-    }
+    };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -27,14 +27,14 @@ class RoundTracker extends React.Component {
 
     fetch(apiUrl, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
       mode: 'cors',
     })
       .then(res => res.json())
-      .then(res => console.log(res))
+      .then(res => {
+        res.rounds
+      })
   }
 
   render() {
