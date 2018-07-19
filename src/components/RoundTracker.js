@@ -8,7 +8,7 @@ class RoundTracker extends React.Component {
       par: '',
       score: '',
       notes: '',
-      round_id: '6' //no snakeCase to match a foreign key column in the table hole
+  //no snakeCase to match a foreign key column in the table hole
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,7 +23,13 @@ class RoundTracker extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const apiUrl = 'http://localhost:8080/api/v1/savehole';
-    const data = this.state;
+    const data = {
+      hole: this.state.hole,
+      par: this.state.par,
+      score: this.state.score,
+      notes: this.state.notes,
+      round_id: this.props.roundId
+    };
 
     fetch(apiUrl, {
       method: 'POST',
@@ -42,7 +48,8 @@ class RoundTracker extends React.Component {
       <form
         className="Hole-form"
         onSubmit={this.handleSubmit}>
-          <label htmlFor="hole">Select hole:</label>
+        <label htmlFor="hole">Select hole:</label>
+        <label htmlFor="">{this.props.round_id}</label>
           <select
             name="hole"
             value={this.state.hole}
