@@ -48,8 +48,7 @@ class RoundTracker extends React.Component {
       <form
         className="Hole-form"
         onSubmit={this.handleSubmit}>
-        <label htmlFor="hole">Select hole:</label>
-        <label htmlFor="">{this.props.round_id}</label>
+          <label htmlFor="hole">Select hole:</label>
           <select
             name="hole"
             value={this.state.hole}
