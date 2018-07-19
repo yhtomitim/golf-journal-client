@@ -9,8 +9,9 @@ class UserDashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user_id: '1', //no snakeCase to match a foreign key column in the table round
-      rounds: []
+      userId: '1', //no snakeCase to match a foreign key column in the table round
+      rounds: [],
+      roundId: ''
     }
     this.createNewRound = this.createNewRound.bind(this);
   }
@@ -22,7 +23,7 @@ class UserDashboard extends React.Component {
   createNewRound(event) {
     event.preventDefault();
     const apiUrl = 'http://localhost:8080/api/v1/newround';
-    const data = this.state;
+    const data = {user_id: this.state.user_id };
     fetch(apiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -30,7 +31,11 @@ class UserDashboard extends React.Component {
       body: JSON.stringify(data)
     })
       .then(res => res.json())
-      .then(res => console.log(res));
+      .then(res => {
+        console.log(res);
+        this.setState({roundId: res})
+
+      });
   }
 
   getRounds() {
@@ -61,7 +66,7 @@ class UserDashboard extends React.Component {
           to='/protected/round'
           onClick={this.createNewRound}>Start a New Round</Link>
         <Route path='/protected/round' component={RoundTracker}/>
-        <RoundTracker />
+        <RoundTracker roundId={this.state.roundId} />
       </section>
     )
   }
