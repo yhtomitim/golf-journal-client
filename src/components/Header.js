@@ -9,7 +9,7 @@ const Header = (props) => {
       <h1 className="App-title">Welcome to Golf Journal</h1>
       <Link to="/demo">Demo</Link> <br/>
       <Link to="/">Home</Link> <br/>
-      <Link to="/login">Login</Link>
+      <Link to="/login">Try It Out</Link>
     </header>
   );
 };
