@@ -4,9 +4,9 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import About from './components/About';
 import Demo from './components/Demo';
-import Login from './components/AuthLinks';
-import './App.css';
+import Login from './components/AuthComponent';
 import UserDashboard from './components/UserDashboard';
+import './App.css';
 
 class App extends Component {
   render() {
@@ -16,7 +16,6 @@ class App extends Component {
         <Route exact path="/" component={About} />
         <Route path="/demo" component={Demo} />
         <Route path="/login" component={Login} />
-        <Route path="/dashboard" component={UserDashboard} />
         <Footer />
       </div>
     );
