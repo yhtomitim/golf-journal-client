@@ -1,11 +1,9 @@
 import React from 'react';
 import {
   Route,
-  Link,
-  withRouter
+  Link
 } from 'react-router-dom'
 import RoundTracker from './RoundTracker';
-
 
 class UserDashboard extends React.Component {
   constructor(props) {
