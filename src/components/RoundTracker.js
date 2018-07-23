@@ -8,16 +8,14 @@ class RoundTracker extends React.Component {
       par: '',
       score: '',
       notes: '',
-  //no snakeCase to match a foreign key column in the table hole
     };
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
-    console.log(this.state);
-    
   }
 
   handleSubmit(event) {
