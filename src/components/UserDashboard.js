@@ -63,9 +63,9 @@ class UserDashboard extends React.Component {
           <article>{this.state.rounds}</article>
         </div>
         <Link
-          to='/protected/round'
+          to='/dashboard/newround'
           onClick={this.createNewRound}>Start a New Round</Link>
-        <Route path='/protected/round' component={RoundTracker}/>
+        <Route path='/dashboard/newround' component={RoundTracker}/>
         <RoundTracker roundId={this.state.roundId} />
       </section>
     )
