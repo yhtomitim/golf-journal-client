@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Link, Redirect, withRouter } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import About from './components/About';
@@ -56,7 +56,6 @@ class App extends Component {
       return (
         <div className="App">
           <Header />
-          {/* <Route path="/" component={About} /> */}
           <UserDashboard
             username={this.state.username}
             userId={this.state.userId}
@@ -69,8 +68,6 @@ class App extends Component {
       <div className="App">
         <Header />
         <Route exact path="/" component={About} />
-        {/* <Route path="/demo" component={Demo} /> */}
-        {/* <Route path="/login" component={Authentication} /> */}
         <form onSubmit={this.getUser} className="App-intro">
           <label htmlFor="username">Username:</label>
           <input
@@ -78,11 +75,8 @@ class App extends Component {
             name="username"
             value={this.state.username}
             onChange={this.handleChange} />
-          <button
-            // onClick={this.toggleDashboard}
-            type="submit">Login</button>
+          <button type="submit">Login</button>
         </form>
-        {/* <Route path="/dashboard" component={UserDashboard} /> */}
         <Footer />
       </div>
     );
