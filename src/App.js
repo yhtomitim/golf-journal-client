@@ -3,8 +3,6 @@ import { Route, Link, Redirect, withRouter } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import About from './components/About';
-import Demo from './components/Demo';
-import Authentication from './components/Authentication';
 import UserDashboard from './components/UserDashboard';
 import './App.css';
 
@@ -12,8 +10,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user_id: '', //no snake case so as to match data column
-      isLoggedIn: false
+      username: '', //no snake case so as to match data column
+      isLoggedIn: false,
+      userId: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.getUser = this.getUser.bind(this);
@@ -27,14 +26,23 @@ class App extends Component {
     });
     console.log(this.state);
   }
+
   getUser(event) {
     event.preventDefault();
-    const apiUrl = `http://localhost:8080/api/v1/users/${this.state.user_id}`;
+    const apiUrl = `http://localhost:8080/api/v1/users/${this.state.username}`;
 
     fetch(apiUrl)
       .then(res => res.json())
-      .then(res => console.log(res));
+      .then(res => {
+        console.log(res);
+        this.setState({
+          userId: res.user.id
+        })
+      })
+      // .then(res => this.setState({ userId: res.user.id }))
+      .then(this.toggleDashboard());
   }
+
   toggleDashboard() {
     this.setState({ isLoggedIn: !this.state.isLoggedIn });
   }
@@ -50,6 +58,8 @@ class App extends Component {
           <Header />
           {/* <Route path="/" component={About} /> */}
           <UserDashboard
+            username={this.state.username}
+            userId={this.state.userId}
             sendToParent={this.updatedToggle}/>
           <Footer />
         </div>
@@ -65,13 +75,12 @@ class App extends Component {
           <label htmlFor="username">Username:</label>
           <input
             type="text"
-            name="user_id"
-            value={this.state.user_id}
+            name="username"
+            value={this.state.username}
             onChange={this.handleChange} />
           <button
-            onClick={this.toggleDashboard}
+            // onClick={this.toggleDashboard}
             type="submit">Login</button>
-          
         </form>
         {/* <Route path="/dashboard" component={UserDashboard} /> */}
         <Footer />
