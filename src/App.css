@@ -33,6 +33,7 @@ a {
 }
 
 .App-footer {
+  background-color: goldenrod;
   font-size: small;
   text-align: left;
   padding-left: 10px;
