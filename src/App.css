@@ -30,15 +30,18 @@ a {
   font-size: large;
   width: 80%;
   background-color: darkgray;
+  margin-bottom: 50px;
 }
 
 .App-footer {
   background-color: goldenrod;
   font-size: small;
   text-align: left;
+  margin: 0;
   padding-left: 10px;
   position:fixed;
   bottom: 0;
+  height: 30px;
   width:100%;
 }
 
