@@ -1,30 +1,54 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 class Authentication extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user_id: '' //no snake case so as to match data column
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.getUser = this.getUser.bind(this);
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     user_id: '', //no snake case so as to match data column
+  //     params: this.user_id
+  //   };
+  //   this.handleChange = this.handleChange.bind(this);
+  //   this.getUser = this.getUser.bind(this);
+  // }
 
-  handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-    console.log(this.state);
-  }
-  getUser(event) {
-    event.preventDefault();
-    const apiUrl = `http://localhost:8080/api/v1/users/${this.state.user_id}`;
+  // handleChange(event) {
+  //   this.setState({
+  //     [event.target.name]: event.target.value
+  //   });
+  //   console.log(this.state);
+  // }
+  // getUser(event) {
+  //   event.preventDefault();
+  //   const apiUrl = `http://localhost:8080/api/v1/users/${this.state.user_id}`;
 
-    fetch(apiUrl)
-      .then(res => res.json())
-      .then(res => console.log(res));
-  }
+  //   fetch(apiUrl)
+  //     .then(res => res.json())
+  //     .then(res => console.log(res));
+  // }
 
+   render() {
+    return (
+      <div className="App-intro">
+        {/* <div id="firebaseui-auth-container"></div> */}
+        <p>This is where the "dropped in" auth piece will render</p>
+        <form onSubmit={this.getUser}>
+          <label htmlFor="username">Username:</label>
+          <input
+            type="text"
+            name="user_id"
+            value={this.state.user_id}
+            onChange={this.handleChange} />
+          <Link to='/login/dashboard'>
+            <button type="submit">Login</button>
+          </Link>
+        </form>
+      </div>
+    )
+  }
+}
+
+
+export default Authentication;
 
   // configureAuth() {
   //   // FirebaseUI config.
@@ -47,26 +71,3 @@ class Authentication extends React.Component {
   //     ui.start('#firebaseui-auth-container', uiConfig);
   //   }
   // }
-   render() {
-    return (
-      <div className="App-intro">
-        {/* <div id="firebaseui-auth-container"></div> */}
-        <p>This is where the "dropped in" auth piece will render</p>
-        <form onSubmit={this.getUser}>
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            name="user_id"
-            value={this.state.user_id}
-            onChange={this.handleChange} />
-          <Link to='/dashboard'>
-            <button type="submit">Login</button>
-          </Link>
-        </form>
-      </div>
-    )
-  }
-}
-
-
-export default Authentication;
