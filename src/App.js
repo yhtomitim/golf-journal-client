@@ -4,7 +4,8 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import About from './components/About';
 import Demo from './components/Demo';
-import Authentication from './components/Authentication'
+import Authentication from './components/Authentication';
+import UserDashboard from './components/UserDashboard';
 import './App.css';
 
 class App extends Component {
@@ -15,6 +16,7 @@ class App extends Component {
         <Route exact path="/" component={About} />
         <Route path="/demo" component={Demo} />
         <Route path="/login" component={Authentication} />
+        <Route path="/dashboard" component={UserDashboard} />
         <Footer />
       </div>
     );
