@@ -9,23 +9,27 @@ class UserDashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '1', //no snakeCase to match a foreign key column in the table round
+      userId: '', //no snakeCase to match a foreign key column in the table round
       rounds: [],
       roundId: '',
       isLoggedIn: false
     }
     this.createNewRound = this.createNewRound.bind(this);
     this.toggleDashboard = this.toggleDashboard.bind(this);
+    this.getRounds = this.getRounds.bind(this);
   }
 
-   componentWillMount() {
-     this.getRounds();
-   }
+  //  componentDidMount() {
+  //    this.getRounds(this.props.userId);
+  //  }
   
   createNewRound(event) {
     event.preventDefault();
+    this.setState({
+      userId: this.props.userId
+    });
     const apiUrl = 'http://localhost:8080/api/v1/newround';
-    const data = {user_id: this.state.user_id };
+    const data = {user_id: this.props.userId };
     fetch(apiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -41,7 +45,8 @@ class UserDashboard extends React.Component {
   }
 
   getRounds() {
-    const apiUrl = 'http://localhost:8080/api/v1/rounds';
+    const apiUrl = `http://localhost:8080/api/v1/rounds/${this.props.userId}`;
+    console.log(apiUrl);
     fetch(apiUrl)
       .then(Response => Response.json())
       .then(Response => {
@@ -68,9 +73,10 @@ class UserDashboard extends React.Component {
   render() {
     return (
       <section className="App-intro">
-        <h3>Welcome {this.props.user_id}</h3>
+        <h3>Welcome {this.props.username}</h3>
         <Link to="/">
           <button onClick={this.toggleDashboard}>Sign out</button>
+          <button onClick={this.getRounds}>Load</button>
         </Link>
         <div className="Rounds-tracked">
           <article>latest round of golf</article>
