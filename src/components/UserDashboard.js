@@ -11,7 +11,8 @@ class UserDashboard extends React.Component {
     this.state = {
       userId: '1', //no snakeCase to match a foreign key column in the table round
       rounds: [],
-      roundId: ''
+      roundId: '',
+      clicked: false,
     }
     this.createNewRound = this.createNewRound.bind(this);
   }
@@ -58,19 +59,26 @@ class UserDashboard extends React.Component {
     return (
       <section className="App-intro">
         <h3>Welcome {this.props.user_id}</h3>
+        <Link to="/">
+          <button>Sign out</button>
+        </Link>
         <div className="Rounds-tracked">
           <article>latest round of golf</article>
           <article>{this.state.rounds}</article>
         </div>
-        <Link
-          to='/dashboard/newround'
-          onClick={this.createNewRound}>Start a New Round</Link>
-        <Route path='/dashboard/newround' component={RoundTracker}/>
+        <button onClick={this.createNewRound}>Start New Round</button>
         <RoundTracker roundId={this.state.roundId} />
       </section>
     )
   }
 }
 
+// function Greeting(props) {
+//   const isLoggedIn = props.isLoggedIn;
+//   if (isLoggedIn) {
+//     return <UserGreeting / > ;
+//   }
+//   return <GuestGreeting / > ;
+// }
 
 export default UserDashboard;
