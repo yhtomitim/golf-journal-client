@@ -14,7 +14,7 @@ const AuthComponent = () => (
       <AuthButton />
       <Link to="/dashboard">User Dashboard</Link>
       <Route path="/login" component={Login} />
-      <PrivateRoute path="/dashboard" component={UserDashboard} />
+      <PrivateRoute path='/dashboard' component={UserDashboard} user_id={this.state.user_id}/>
     </div>
   </Router>
 );
@@ -89,7 +89,7 @@ class Login extends React.Component {
   };
 
   render() {
-    const { from } = this.props.location.state || { from: { pathname: "/dashboard" } };
+    const { from } = this.props.location.state || { from: { pathname: `/dashboard/${this.state.user_id}` } };
     const { redirectToReferrer } = this.state;
 
     if (redirectToReferrer) {
