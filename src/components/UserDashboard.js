@@ -56,7 +56,7 @@ class UserDashboard extends React.Component {
 
   render() {
     return (
-      <section>
+      <section className="App-intro">
         <h3>Welcome {this.props.user_id}</h3>
         <div className="Rounds-tracked">
           <article>latest round of golf</article>
