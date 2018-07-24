@@ -11,9 +11,11 @@ class UserDashboard extends React.Component {
     this.state = {
       userId: '1', //no snakeCase to match a foreign key column in the table round
       rounds: [],
-      roundId: ''
+      roundId: '',
+      isLoggedIn: false
     }
     this.createNewRound = this.createNewRound.bind(this);
+    this.toggleDashboard = this.toggleDashboard.bind(this);
   }
 
    componentWillMount() {
@@ -54,12 +56,21 @@ class UserDashboard extends React.Component {
       })
   }
 
+   toggleDashboard() {
+     this.setState({ isLoggedIn: !this.state.isLoggedIn });
+     this.sendToParent(this.state.isLoggedIn);
+   }
+  
+  sendToParent(loggedInBoolean) {
+    this.props.sendToParent(loggedInBoolean);
+  }
+  
   render() {
     return (
       <section className="App-intro">
         <h3>Welcome {this.props.user_id}</h3>
         <Link to="/">
-          <button>Sign out</button>
+          <button onClick={this.toggleDashboard}>Sign out</button>
         </Link>
         <div className="Rounds-tracked">
           <article>latest round of golf</article>
