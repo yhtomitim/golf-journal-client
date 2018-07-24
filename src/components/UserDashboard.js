@@ -11,8 +11,7 @@ class UserDashboard extends React.Component {
     this.state = {
       userId: '1', //no snakeCase to match a foreign key column in the table round
       rounds: [],
-      roundId: '',
-      clicked: false,
+      roundId: ''
     }
     this.createNewRound = this.createNewRound.bind(this);
   }
