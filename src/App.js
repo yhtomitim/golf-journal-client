@@ -48,7 +48,7 @@ class App extends Component {
   render() {
     if (this.state.isLoggedIn) {
       return (
-        <div className="App">
+        <div className="container">
           <Header />
           <UserDashboard
             username={this.state.username}
@@ -59,16 +59,33 @@ class App extends Component {
       )
     }
     return (
-      <div className="App">
+      <div className="container">
         <Header />
         <Route exact path="/" component={About} />
         <form onSubmit={this.getUser} className="App-intro">
+          <div className="field">
+            <div className="control">
+              <input
+                name = "username"
+                value = {
+                  this.state.username
+                }
+                onChange = {
+                  this.handleChange
+                }
+                type="text" className="input"
+              />
+            </div>
+          </div>
+          <div className="control">
           <label htmlFor="username">Username:</label>
           <input
+            className="field"
             type="text"
             name="username"
             value={this.state.username}
             onChange={this.handleChange} />
+          </div>
           <button type="submit">Login</button>
         </form>
         <Footer />
