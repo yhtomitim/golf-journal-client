@@ -16,7 +16,6 @@ class App extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.getUser = this.getUser.bind(this);
-    this.toggleDashboard = this.toggleDashboard.bind(this);
     this.updatedToggle = this.updatedToggle.bind(this);
   }
 
@@ -36,15 +35,10 @@ class App extends Component {
       .then(res => {
         console.log(res);
         this.setState({
-          userId: res.user.id
+          userId: res.user.id,
+          isLoggedIn: true
         })
       })
-      // .then(res => this.setState({ userId: res.user.id }))
-      .then(this.toggleDashboard());
-  }
-
-  toggleDashboard() {
-    this.setState({ isLoggedIn: !this.state.isLoggedIn });
   }
 
   updatedToggle(childData) {
