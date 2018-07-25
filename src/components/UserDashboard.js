@@ -4,6 +4,7 @@ import {
   Link
 } from 'react-router-dom'
 import RoundTracker from './RoundTracker';
+import moment from 'moment';
 
 class UserDashboard extends React.Component {
   constructor(props) {
@@ -64,7 +65,7 @@ class UserDashboard extends React.Component {
         const rounds = Response.rounds.map(((round) => {
           return (
             <div key={round.id}>
-              <p>{round.playedOn}</p>
+              <p>{moment(round.playedOn).format('MMM Do YYYY')}</p>
             </div>
           )
         }))
