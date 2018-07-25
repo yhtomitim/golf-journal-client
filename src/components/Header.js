@@ -5,11 +5,9 @@ const Header = (props) => {
   return (
     <header className="hero">
       <div className="hero-body">
-        <div className="container">
-      <img src={heroImage} className="App-logo" alt="logo" />
-      <h1 className="title">Welcome to Golf Journal</h1>
-        </div>
-        </div>
+        <img src={heroImage} className="image" alt="image of golf hole by a pond" />
+        <h1 className="title ">Golf Journal</h1>
+      </div>
     </header>
   );
 };

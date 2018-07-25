@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  Route,
-  Link
-} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import RoundTracker from './RoundTracker';
 import RoundCard from './RoundCard';
 import moment from 'moment';
@@ -16,7 +13,7 @@ class UserDashboard extends React.Component {
       roundId: '',
       isLoggedIn: false,
       showRoundTracker: false,
-      selectedRound: {},
+      // selectedRound: {},
     }
     this.createNewRound = this.createNewRound.bind(this);
     this.toggleDashboard = this.toggleDashboard.bind(this);
@@ -24,14 +21,7 @@ class UserDashboard extends React.Component {
   }
 
   componentDidMount() {
-    // if (!this.props.userId) {
-    //   return this.setState({ loading: true });
-    // }
     this.getRounds();
-      // .then(rounds => this.setState({
-      //   rounds,
-      //   loading: false
-      // }))
    }
   
   
@@ -67,7 +57,7 @@ class UserDashboard extends React.Component {
       .then(Response => {
         const rounds = Response.rounds.map(((round) => {
           return (
-            <div key={round.id}>
+            <div className="card" key={round.id}>
               <p>{moment(round.playedOn).format('MMM Do YYYY')}</p>
             </div>
           )
@@ -81,8 +71,8 @@ class UserDashboard extends React.Component {
      this.sendToParent(this.state.isLoggedIn);
    }
   
-  sendToParent(loggedInBoolean) {
-    this.props.sendToParent(loggedInBoolean);
+  sendToParent(loggedInState) {
+    this.props.sendToParent(loggedInState);
   }
   
   render() {
@@ -90,25 +80,34 @@ class UserDashboard extends React.Component {
       <div className="content">
       <section className="container">
         {/* <h2>{this.props.userId}</h2> */}
-        <h3 className="title">Welcome {this.props.username}</h3>
+        <h3 className="title">Welcome to your Dashboard, {this.props.uid}!</h3>
         <Link to="/">
-          <button onClick={this.toggleDashboard}>Sign out</button>
-          <button onClick={this.getRounds}>Load</button>
+          <button className="button is-danger is-rounded is-outlined" onClick={this.toggleDashboard}>Sign out</button>
         </Link>
-        <div className="box Rounds-tracked">
-          {this.state.rounds.length && (
-            < div className="Rounds-tracked">
-              <article>latest round of golf</article>
-              <article>{this.state.rounds}</article>
-            </div>
-          )}
-          {!this.state.rounds.length && (
-            <h2>You have no rounds. Go play!</h2>
-          )}
+        <div className="section">
+          <div className="columns">
+            <div className="box column">
+            {!this.state.rounds.length && (
+              <div className="column">
+                <h3>You have no tracked rounds. Go play some golf!</h3>
+              </div>
+            )}
+              {this.state.rounds.length && (
+                <div className="column">
+                  <article>{this.state.rounds}</article>
+                </div>
+              )}
+              </div>
+              <div className="column">
+                <h4 className="content has-text-centered">holes recorded go here</h4>
+              </div>
+            <div className="column">
+              {/* {this.state.selectedRound && <RoundCard round={this.state.selectedRound} />} */}
+              <button onClick={this.createNewRound}>Start New Round</button>
+            {this.state.showRoundTracker && <RoundTracker roundId={this.state.roundId} />}
+            </div>    
           </div>
-          {this.state.selectedRound && <RoundCard round={this.state.selectedRound} />}
-        <button onClick={this.createNewRound}>Start New Round</button>
-        {this.state.showRoundTracker && <RoundTracker roundId={this.state.roundId} />}
+        </div> 
       </section>
       </div>
     )

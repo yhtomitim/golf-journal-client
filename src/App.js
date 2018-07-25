@@ -10,7 +10,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '', //no snake case so as to match data column
+      uid: '',
       isLoggedIn: false,
       userId: ''
     };
@@ -28,7 +28,7 @@ class App extends Component {
 
   getUser(event) {
     event.preventDefault();
-    const apiUrl = `http://localhost:8080/api/v1/users/${this.state.username}`;
+    const apiUrl = `http://localhost:8080/api/v1/users/${this.state.uid}`;
 
     fetch(apiUrl)
       .then(res => res.json())
@@ -48,10 +48,10 @@ class App extends Component {
   render() {
     if (this.state.isLoggedIn) {
       return (
-        <div className="container">
+        <div className="">
           <Header />
           <UserDashboard
-            username={this.state.username}
+            uid={this.state.uid}
             userId={this.state.userId}
             sendToParent={this.updatedToggle}/>
           <Footer />
@@ -59,35 +59,35 @@ class App extends Component {
       )
     }
     return (
-      <div className="container">
+      <div>
         <Header />
-        <Route exact path="/" component={About} />
-        <form onSubmit={this.getUser} className="App-intro">
-          <div className="field">
-            <div className="control">
-              <input
-                name = "username"
-                value = {
-                  this.state.username
-                }
-                onChange = {
-                  this.handleChange
-                }
-                type="text" className="input"
-              />
-            </div>
-          </div>
-          <div className="control">
-          <label htmlFor="username">Username:</label>
-          <input
-            className="field"
-            type="text"
-            name="username"
-            value={this.state.username}
-            onChange={this.handleChange} />
-          </div>
-          <button type="submit">Login</button>
-        </form>
+        <div className="section is-paddingless">
+          <Route
+            exact path="/"
+            component={About} />
+        </div>
+        <div className="section">
+          <form
+            onSubmit={this.getUser}
+            className="container">
+            <div className="field">
+              <div className="control">
+                <label
+                  htmlFor="uid"
+                  className="label">Username</label>
+                  <div className="control">
+                    <input
+                      name="uid"
+                      value={this.state.uid}
+                      onChange={this.handleChange}
+                      type="text"
+                    className="input is-primary is-rounded" />
+                  </div>
+                </div>
+              </div>
+          <button className="button is-primary is-rounded" type="submit">Login</button>
+          </form>
+        </div>
         <Footer />
       </div>
     );
