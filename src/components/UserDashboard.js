@@ -4,6 +4,7 @@ import {
   Link
 } from 'react-router-dom'
 import RoundTracker from './RoundTracker';
+import RoundCard from './RoundCard';
 import moment from 'moment';
 
 class UserDashboard extends React.Component {
@@ -14,7 +15,8 @@ class UserDashboard extends React.Component {
       rounds: [],
       roundId: '',
       isLoggedIn: false,
-      showRoundTracker: false
+      showRoundTracker: false,
+      selectedRound: {},
     }
     this.createNewRound = this.createNewRound.bind(this);
     this.toggleDashboard = this.toggleDashboard.bind(this);
@@ -31,6 +33,7 @@ class UserDashboard extends React.Component {
       //   loading: false
       // }))
    }
+  
   
   createNewRound(event) {
     event.preventDefault();
@@ -69,7 +72,7 @@ class UserDashboard extends React.Component {
             </div>
           )
         }))
-        this.setState({ rounds });
+        this.setState({ rounds, selectedRound: Response.rounds[0] });
       })
   }
 
@@ -84,14 +87,15 @@ class UserDashboard extends React.Component {
   
   render() {
     return (
-      <section className="App-intro">
+      <div className="content">
+      <section className="container">
         {/* <h2>{this.props.userId}</h2> */}
-        <h3>Welcome {this.props.username}</h3>
+        <h3 className="title">Welcome {this.props.username}</h3>
         <Link to="/">
           <button onClick={this.toggleDashboard}>Sign out</button>
           <button onClick={this.getRounds}>Load</button>
         </Link>
-        <div className="Rounds-tracked">
+        <div className="box Rounds-tracked">
           {this.state.rounds.length && (
             < div className="Rounds-tracked">
               <article>latest round of golf</article>
@@ -101,10 +105,12 @@ class UserDashboard extends React.Component {
           {!this.state.rounds.length && (
             <h2>You have no rounds. Go play!</h2>
           )}
-        </div>
+          </div>
+          {this.state.selectedRound && <RoundCard round={this.state.selectedRound} />}
         <button onClick={this.createNewRound}>Start New Round</button>
         {this.state.showRoundTracker && <RoundTracker roundId={this.state.roundId} />}
       </section>
+      </div>
     )
   }
 }
