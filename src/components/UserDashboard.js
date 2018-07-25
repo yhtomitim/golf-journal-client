@@ -35,7 +35,7 @@ class UserDashboard extends React.Component {
     this.setState({
       userId: this.props.userId
     });
-    const apiUrl = 'http://localhost:8080/api/v1/rounds/newround';
+    const apiUrl = 'https://golf-journal-server.herokuapp.com/api/v1/rounds/newround';
     const data = { user_id: this.props.userId };
     fetch(apiUrl, {
       method: 'POST',
@@ -54,7 +54,7 @@ class UserDashboard extends React.Component {
   }
 
   getRounds() {
-    const apiUrl = `http://localhost:8080/api/v1/rounds/${this.props.userId}`;
+    const apiUrl = `https://golf-journal-server.herokuapp.com/api/v1/rounds/${this.props.userId}`;
     fetch(apiUrl)
       .then(Response => Response.json())
       .then(Response => {
@@ -79,7 +79,7 @@ class UserDashboard extends React.Component {
 
   getHolesForRounds(arr) {
     arr.forEach(roundId => {
-      const apiUrl = `http://localhost:8080/api/v1/holes/${roundId}`;
+      const apiUrl = `https://golf-journal-server.herokuapp.com/api/v1/holes/${roundId}`;
       fetch(apiUrl)
         .then(res => res.json())
         .then(res => {

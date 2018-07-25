@@ -26,7 +26,7 @@ class App extends Component {
 
   getUser(event) {
     event.preventDefault();
-    const apiUrl = `http://localhost:8080/api/v1/users/${this.state.uid}`;
+    const apiUrl = `https://golf-journal-server.herokuapp.com/api/v1/users/${this.state.uid}`;
 
     fetch(apiUrl)
       .then(res => res.json())

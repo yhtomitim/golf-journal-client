@@ -22,7 +22,7 @@ class RoundTracker extends React.Component {
 
   saveHole(event) {
     event.preventDefault();
-    const apiUrl = 'http://localhost:8080/api/v1/holes/savehole';
+    const apiUrl = 'https://golf-journal-server.herokuapp.com/api/v1/holes/savehole';
     const data = {
       hole: this.state.hole,
       par: this.state.par,
