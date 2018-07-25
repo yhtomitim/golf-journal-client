@@ -12,16 +12,24 @@ class UserDashboard extends React.Component {
       userId: '', //no snakeCase to match a foreign key column in the table round
       rounds: [],
       roundId: '',
-      isLoggedIn: false
+      isLoggedIn: false,
+      showRoundTracker: false
     }
     this.createNewRound = this.createNewRound.bind(this);
     this.toggleDashboard = this.toggleDashboard.bind(this);
     this.getRounds = this.getRounds.bind(this);
   }
 
-  //  componentDidMount() {
-  //    this.getRounds(this.props.userId);
-  //  }
+  componentDidMount() {
+    // if (!this.props.userId) {
+    //   return this.setState({ loading: true });
+    // }
+    this.getRounds();
+      // .then(rounds => this.setState({
+      //   rounds,
+      //   loading: false
+      // }))
+   }
   
   createNewRound(event) {
     event.preventDefault();
@@ -39,7 +47,10 @@ class UserDashboard extends React.Component {
       .then(res => res.json())
       .then(res => {
         console.log(res);
-        this.setState({roundId: res})
+        this.setState({
+          roundId: res,
+          showRoundTracker: true
+        })
 
       });
   }
@@ -50,14 +61,14 @@ class UserDashboard extends React.Component {
     fetch(apiUrl)
       .then(Response => Response.json())
       .then(Response => {
-        let rounds = Response.rounds.map(((round) => {
+        const rounds = Response.rounds.map(((round) => {
           return (
             <div key={round.id}>
               <p>{round.playedOn}</p>
             </div>
           )
         }))
-        this.setState({ rounds: rounds })
+        this.setState({ rounds });
       })
   }
 
@@ -73,17 +84,25 @@ class UserDashboard extends React.Component {
   render() {
     return (
       <section className="App-intro">
+        {/* <h2>{this.props.userId}</h2> */}
         <h3>Welcome {this.props.username}</h3>
         <Link to="/">
           <button onClick={this.toggleDashboard}>Sign out</button>
           <button onClick={this.getRounds}>Load</button>
         </Link>
         <div className="Rounds-tracked">
-          <article>latest round of golf</article>
-          <article>{this.state.rounds}</article>
+          {this.state.rounds.length && (
+            < div className="Rounds-tracked">
+              <article>latest round of golf</article>
+              <article>{this.state.rounds}</article>
+            </div>
+          )}
+          {!this.state.rounds.length && (
+            <h2>You have no rounds. Go play!</h2>
+          )}
         </div>
         <button onClick={this.createNewRound}>Start New Round</button>
-        <RoundTracker roundId={this.state.roundId} />
+        {this.state.showRoundTracker && <RoundTracker roundId={this.state.roundId} />}
       </section>
     )
   }
