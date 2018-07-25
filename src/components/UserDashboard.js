@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import RoundTracker from './RoundTracker';
-import RoundCard from './RoundCard';
+import RoundHoles from './RoundHoles';
 import moment from 'moment';
 
 class UserDashboard extends React.Component {
@@ -10,15 +10,17 @@ class UserDashboard extends React.Component {
     this.state = {
       userId: '', //no snakeCase to match a foreign key column in the table round
       rounds: [],
-      roundId: '',
+      roundIds: [],
       isLoggedIn: false,
       showRoundTracker: false,
+      roundWithHoles: [],
       // selectedRound: {},
     }
     this.createNewRound = this.createNewRound.bind(this);
     this.toggleDashboard = this.toggleDashboard.bind(this);
     this.getRounds = this.getRounds.bind(this);
     this.updatedShowRoundTracker = this.updatedShowRoundTracker.bind(this);
+    this.getHolesForRounds = this.getHolesForRounds.bind(this);
     
   }
 
@@ -56,20 +58,53 @@ class UserDashboard extends React.Component {
 
   getRounds() {
     const apiUrl = `http://localhost:8080/api/v1/rounds/${this.props.userId}`;
-    console.log(apiUrl);
     fetch(apiUrl)
       .then(Response => Response.json())
       .then(Response => {
+        const arr = [];
         const rounds = Response.rounds.map(((round) => {
+          arr.push(round.id);
+          console.log(round);
           return (
             <div className="card" key={round.id}>
               <p>{moment(round.playedOn).format('MMM Do YYYY')}</p>
             </div>
           )
         }))
-        this.setState({ rounds, selectedRound: Response.rounds[0] });
+        this.setState({
+          rounds,
+          selectedRound: Response.rounds[0],
+          roundIds: arr,
+        });
+        this.getHolesForRounds(this.state.roundIds);
       })
   }
+
+  getHolesForRounds(arr) {
+    arr.forEach(roundId => {
+      const apiUrl = `http://localhost:8080/api/v1/holes/${roundId}`;
+      fetch(apiUrl)
+        .then(res => res.json())
+        .then(res => {
+          const holes = res.holes.map(round => {
+            return (
+              <div key={round.id} className="card">
+                <header className="card-header">
+                  <p className="card-header-title"> Hole No.{round.hole}</p>
+                </header>
+                <div className="card-content">
+                  <p className="content">Par: {round.par}</p>
+                  <p className="content">Score: {round.score}</p>
+                  <p className="content">Notes: {round.notes}</p>
+                </div>
+              </div>
+            )
+          })
+          this.setState({ roundWithHoles: holes })
+        });
+    })
+  }
+
 
    toggleDashboard() {
      this.setState({ isLoggedIn: !this.state.isLoggedIn });
@@ -99,12 +134,16 @@ class UserDashboard extends React.Component {
             )}
               {this.state.rounds.length && (
                 <div className="column">
+                    <h4 className="content has-text-centered">Rounds Tracked</h4>
                   <article>{this.state.rounds}</article>
                 </div>
               )}
               </div>
               <div className="column">
-                <h4 className="content has-text-centered">holes recorded go here</h4>
+                <h4 className="content has-text-centered">Latest Notes</h4>
+                {this.state.roundWithHoles && (
+                  <div>{this.state.roundWithHoles}</div>
+                )}
               </div>
             <div className="column">
               {/* {this.state.selectedRound && <RoundCard round={this.state.selectedRound} />} */}

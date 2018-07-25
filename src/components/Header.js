@@ -5,7 +5,7 @@ const Header = (props) => {
   return (
     <header className="hero">
       <div className="hero-body">
-        <img src={heroImage} className="image" alt="image of golf hole by a pond" />
+        <img src={heroImage} className="image" alt="golf hole by a pond" />
         <h1 className="title ">Golf Journal</h1>
       </div>
     </header>

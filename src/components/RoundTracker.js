@@ -37,8 +37,8 @@ class RoundTracker extends React.Component {
       mode: 'cors',
       body: JSON.stringify(data),
     })
-    .then(res => res.json())
-    .then(res => { res.round })
+      .then(res => res.json())
+      .then(res => console.log(res))
   }
   
   toggleRoundTracker() {
