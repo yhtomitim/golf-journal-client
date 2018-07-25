@@ -103,7 +103,7 @@ class UserDashboard extends React.Component {
               </div>
             <div className="column">
               {/* {this.state.selectedRound && <RoundCard round={this.state.selectedRound} />} */}
-              <button onClick={this.createNewRound}>Start New Round</button>
+              <button className="button is-rounded is-primary is-outlined" onClick={this.createNewRound}>Start New Round</button>
             {this.state.showRoundTracker && <RoundTracker roundId={this.state.roundId} />}
             </div>    
           </div>
