@@ -4,7 +4,6 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import About from './components/About';
 import UserDashboard from './components/UserDashboard';
-import './App.css';
 
 class App extends Component {
   constructor(props) {

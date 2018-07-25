@@ -1,7 +1,7 @@
 import React from "react";
 import heroImage from '../header.jpg';
 
-const Header = (props) => {
+const Header = () => {
   return (
     <header className="hero">
       <div className="hero-body">

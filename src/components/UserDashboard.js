@@ -1,20 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import RoundTracker from './RoundTracker';
-import RoundHoles from './RoundHoles';
 import moment from 'moment';
 
 class UserDashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '', //no snakeCase to match a foreign key column in the table round
+      userId: '',
       rounds: [],
       roundIds: [],
       isLoggedIn: false,
       showRoundTracker: false,
       roundWithHoles: [],
-      // selectedRound: {},
     }
     this.createNewRound = this.createNewRound.bind(this);
     this.toggleDashboard = this.toggleDashboard.bind(this);
@@ -52,7 +50,6 @@ class UserDashboard extends React.Component {
           roundId: res,
           showRoundTracker: true
         })
-
       });
   }
 
@@ -105,7 +102,6 @@ class UserDashboard extends React.Component {
     })
   }
 
-
    toggleDashboard() {
      this.setState({ isLoggedIn: !this.state.isLoggedIn });
      this.sendToParent(this.state.isLoggedIn);
@@ -119,7 +115,6 @@ class UserDashboard extends React.Component {
     return (
       <div className="content">
       <section className="container">
-        {/* <h2>{this.props.userId}</h2> */}
         <h3 className="title">Welcome to your Dashboard, {this.props.uid}!</h3>
         <Link to="/">
           <button className="button is-danger is-rounded is-outlined" onClick={this.toggleDashboard}>Sign out</button>
@@ -146,7 +141,6 @@ class UserDashboard extends React.Component {
                 )}
               </div>
             <div className="column">
-              {/* {this.state.selectedRound && <RoundCard round={this.state.selectedRound} />} */}
               <button className="button is-rounded is-primary is-outlined" onClick={this.createNewRound}>Start New Round</button>
               {this.state.showRoundTracker
                 && <RoundTracker  
@@ -163,13 +157,5 @@ class UserDashboard extends React.Component {
     )
   }
 }
-
-// function Greeting(props) {
-//   const isLoggedIn = props.isLoggedIn;
-//   if (isLoggedIn) {
-//     return <UserGreeting / > ;
-//   }
-//   return <GuestGreeting / > ;
-// }
 
 export default UserDashboard;
