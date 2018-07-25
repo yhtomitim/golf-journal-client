@@ -42,8 +42,10 @@ class RoundTracker extends React.Component {
   }
   
   toggleRoundTracker() {
-     this.setState({ roundComplete: !this.state.roundComplete });
-     this.sendToParent(this.state.roundComplete);
+    this.setState({ roundComplete: !this.state.roundComplete });
+    this.sendToParent(this.state.roundComplete);
+    this.props.getRounds();
+    this.props.getHolesForRounds([7]);
   };
 
     sendToParent(roundComplete) {

@@ -139,7 +139,7 @@ class UserDashboard extends React.Component {
                 </div>
               )}
               </div>
-              <div className="column">
+              <div className="box column">
                 <h4 className="content has-text-centered">Latest Notes</h4>
                 {this.state.roundWithHoles && (
                   <div>{this.state.roundWithHoles}</div>
@@ -148,7 +148,13 @@ class UserDashboard extends React.Component {
             <div className="column">
               {/* {this.state.selectedRound && <RoundCard round={this.state.selectedRound} />} */}
               <button className="button is-rounded is-primary is-outlined" onClick={this.createNewRound}>Start New Round</button>
-            {this.state.showRoundTracker && <RoundTracker sendToParent={this.updatedShowRoundTracker} roundId={this.state.roundId} />}
+              {this.state.showRoundTracker
+                && <RoundTracker  
+                  sendToParent={this.updatedShowRoundTracker}
+                  roundId={this.state.roundId}
+                  getRounds={this.getRounds}
+                  getHolesForRounds={this.getHolesForRounds}
+              />}
             </div>    
           </div>
         </div> 
