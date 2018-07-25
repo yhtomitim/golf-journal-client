@@ -8,19 +8,21 @@ class RoundTracker extends React.Component {
       par: '',
       score: '',
       notes: '',
+      roundComplete: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.saveHole = this.saveHole.bind(this);
+    this.toggleRoundTracker = this.toggleRoundTracker.bind(this);
   }
 
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
 
-  handleSubmit(event) {
+  saveHole(event) {
     event.preventDefault();
-    const apiUrl = 'http://localhost:8080/api/v1/savehole';
+    const apiUrl = 'http://localhost:8080/api/v1/holes/savehole';
     const data = {
       hole: this.state.hole,
       par: this.state.par,
@@ -32,18 +34,25 @@ class RoundTracker extends React.Component {
     fetch(apiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
       mode: 'cors',
+      body: JSON.stringify(data),
     })
-      .then(res => res.json())
-      .then(res => {
-        res.rounds
-      })
+    .then(res => res.json())
+    .then(res => { res.round })
   }
+  
+  toggleRoundTracker() {
+     this.setState({ roundComplete: !this.state.roundComplete });
+     this.sendToParent(this.state.roundComplete);
+  };
 
+    sendToParent(roundComplete) {
+      this.props.sendToParent(roundComplete);
+    }
+  
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.saveHole}>
         <div className="field">
           <label
             className="label"
@@ -129,7 +138,10 @@ class RoundTracker extends React.Component {
             </button>
           </div>
           <div className="control">
-            <button className="button is-success">Finish Round</button>
+            <button
+              className="button is-success"
+              onClick={this.toggleRoundTracker}>Finish Round
+            </button>
           </div>
         </div>
       </form>

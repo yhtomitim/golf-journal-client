@@ -18,20 +18,25 @@ class UserDashboard extends React.Component {
     this.createNewRound = this.createNewRound.bind(this);
     this.toggleDashboard = this.toggleDashboard.bind(this);
     this.getRounds = this.getRounds.bind(this);
+    this.updatedShowRoundTracker = this.updatedShowRoundTracker.bind(this);
+    
   }
 
   componentDidMount() {
     this.getRounds();
    }
   
+  updatedShowRoundTracker(childData) {
+    this.setState({ showRoundTracker: childData });
+  }
   
   createNewRound(event) {
     event.preventDefault();
     this.setState({
       userId: this.props.userId
     });
-    const apiUrl = 'http://localhost:8080/api/v1/newround';
-    const data = {user_id: this.props.userId };
+    const apiUrl = 'http://localhost:8080/api/v1/rounds/newround';
+    const data = { user_id: this.props.userId };
     fetch(apiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -104,7 +109,7 @@ class UserDashboard extends React.Component {
             <div className="column">
               {/* {this.state.selectedRound && <RoundCard round={this.state.selectedRound} />} */}
               <button className="button is-rounded is-primary is-outlined" onClick={this.createNewRound}>Start New Round</button>
-            {this.state.showRoundTracker && <RoundTracker roundId={this.state.roundId} />}
+            {this.state.showRoundTracker && <RoundTracker sendToParent={this.updatedShowRoundTracker} roundId={this.state.roundId} />}
             </div>    
           </div>
         </div> 
