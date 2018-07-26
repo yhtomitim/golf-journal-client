@@ -113,6 +113,16 @@ class UserDashboard extends React.Component {
           </Link>
           <div className="section">
             <div className="box columns">
+              <div className="column">
+                <h4 className="content has-text-centered">Track Round</h4>
+                <button className="button is-rounded is-primary is-outlined" onClick={this.createNewRound}>Start New Round</button>
+                {this.state.showRoundTracker
+                  && <RoundTracker  
+                    sendToParent={this.updatedShowRoundTracker}
+                    roundId={this.state.roundId}
+                    getRounds={this.getRounds}
+                />}
+              </div>    
               {!this.state.rounds.length && (
                 <div className="column">
                   <h3>You have no tracked rounds. Go play some golf!</h3>
@@ -125,21 +135,11 @@ class UserDashboard extends React.Component {
                 </div>
               )}
               <div className="column">
-                <h4 className="content has-text-centered">Latest Notes</h4>
+                <h4 className="content has-text-centered">Round Review</h4>
                 {this.state.holesForRound && (
                   <div>{this.state.holesForRound}</div>
                 )}
               </div>
-              <div className="column">
-                <h4 className="content has-text-centered">Track Round</h4>
-                <button className="button is-rounded is-primary is-outlined" onClick={this.createNewRound}>Start New Round</button>
-                {this.state.showRoundTracker
-                  && <RoundTracker  
-                    sendToParent={this.updatedShowRoundTracker}
-                    roundId={this.state.roundId}
-                    getRounds={this.getRounds}
-                />}
-              </div>    
             </div>
           </div> 
         </section>

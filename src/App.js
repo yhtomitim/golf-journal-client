@@ -62,29 +62,29 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <div className="section is-paddingless">
+        <div className="columns">
           <form
             onSubmit={this.getUser}
-            className="container">
-            <div className="field">
+            className="column is-4 is-offset-7">
+            <div className = "field">
               <div className="control">
                 <label
                   htmlFor="uid"
                   className="label">Username</label>
-                  <div className="control">
-                    <input
-                      name="uid"
-                      value={this.state.uid}
-                      onChange={this.handleChange}
-                      type="text"
-                    className="input is-primary is-rounded" />
-                  </div>
+                <div className="control">
+                  <input
+                    name="uid"
+                    value={this.state.uid}
+                    onChange={this.handleChange}
+                    type="text"
+                  className="input is-primary is-rounded" />
+                </div>
                 </div>
               </div>
             <button className="button is-primary is-rounded" type="submit">Login</button>
           </form>
         </div>
-        <div className="section">
+        <div className="section is-paddingless">
           <Route
             exact path="/"
             component={About} />
