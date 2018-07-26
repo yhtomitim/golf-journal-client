@@ -4,7 +4,7 @@ class RoundTracker extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hole: '1',
+      hole: '',
       par: '',
       score: '',
       notes: '',
@@ -38,7 +38,13 @@ class RoundTracker extends React.Component {
       body: JSON.stringify(data),
     })
       .then(res => res.json())
-      .then(res => console.log(res))
+      .then(res => console.log(res));
+    this.setState({
+      hole: '',
+      par: '',
+      score: '',
+      notes: '',
+    })
   }
   
   toggleRoundTracker() {
@@ -61,7 +67,7 @@ class RoundTracker extends React.Component {
             htmlFor="hole">Select hole:
           </label>
           <div className="control">
-            <div className="select">
+            <div className="select is rounded">
               <select
                 name="hole"
                 value={this.state.hole}

@@ -40,7 +40,10 @@ class App extends Component {
   }
 
   updatedToggle(childData) {
-    this.setState({ isLoggedIn: childData });
+    this.setState({
+      isLoggedIn: childData,
+      uid: '',
+    });
   }
 
   render() {
