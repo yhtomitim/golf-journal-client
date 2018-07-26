@@ -70,7 +70,7 @@ class App extends Component {
               <div className="control">
                 <label
                   htmlFor="uid"
-                  className="label">Username</label>
+                  className="label">Username:</label>
                 <div className="control">
                   <input
                     name="uid"
