@@ -16,13 +16,13 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.getUser = this.getUser.bind(this);
     this.updatedToggle = this.updatedToggle.bind(this);
-  }
+  };
 
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value
     });
-  }
+  };
 
   getUser(event) {
     event.preventDefault();
@@ -37,14 +37,14 @@ class App extends Component {
           isLoggedIn: true
         })
       })
-  }
+  };
 
   updatedToggle(childData) {
     this.setState({
       isLoggedIn: childData,
       uid: '',
     });
-  }
+  };
 
   render() {
     if (this.state.isLoggedIn) {
@@ -58,7 +58,7 @@ class App extends Component {
           <Footer />
         </div>
       )
-    }
+    };
     return (
       <div>
         <Header />
@@ -91,8 +91,8 @@ class App extends Component {
         </div>
         <Footer />
       </div>
-    );
-  }
-}
+    )
+  };
+};
 
 export default App;

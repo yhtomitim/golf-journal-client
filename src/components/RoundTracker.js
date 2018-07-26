@@ -14,11 +14,11 @@ class RoundTracker extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.saveHole = this.saveHole.bind(this);
     this.toggleRoundTracker = this.toggleRoundTracker.bind(this);
-  }
+  };
 
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
-  }
+  };
 
   saveHole(event) {
     event.preventDefault();
@@ -45,13 +45,12 @@ class RoundTracker extends React.Component {
       score: '',
       notes: '',
     })
-  }
+  };
   
   toggleRoundTracker() {
     this.setState({ roundComplete: !this.state.roundComplete });
     this.sendToParent(this.state.roundComplete);
     this.props.getRounds();
-    this.props.getHolesForRounds([7]);
   };
 
     sendToParent(roundComplete) {
@@ -154,7 +153,7 @@ class RoundTracker extends React.Component {
         </div>
       </form>
     )
-  }
-}
+  };
+};
 
 export default RoundTracker;
