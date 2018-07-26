@@ -60,7 +60,9 @@ class UserDashboard extends React.Component {
           console.log(round);
           return (
             <div onClick={() => this.getHolesForRound(round.id)} className="card" key={round.id}>
-              <h5 className="card-header-title">{moment(round.playedOn).format('MMM Do YYYY')}</h5>
+              <h5 className="card-header-title">
+                <a>{moment(round.playedOn).format('MMM Do YYYY')}</a>
+              </h5>
             </div>
           )
         });
