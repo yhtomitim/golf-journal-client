@@ -67,7 +67,7 @@ class RoundTracker extends React.Component {
             htmlFor="hole">Select hole:
           </label>
           <div className="control">
-            <div className="select is rounded">
+            <div className="select is-primary is-rounded">
               <select
                 name="hole"
                 value={this.state.hole}
@@ -131,7 +131,7 @@ class RoundTracker extends React.Component {
           </label>
           <div className="control">
             <textarea
-              className="textarea"
+              className="textarea is-primary is-rounded"
               name="notes"
               placeholder="enter notes"
               value={this.state.notes}
@@ -141,13 +141,13 @@ class RoundTracker extends React.Component {
         <div className="field is-grouped">
           <div className="control">
             <button
-              className="button is-primary"
+              className="button is-primary is-rounded"
               type="submit">Save Hole
             </button>
           </div>
           <div className="control">
             <button
-              className="button is-success"
+              className="button is-success is-rounded"
               onClick={this.toggleRoundTracker}>Finish Round
             </button>
           </div>
