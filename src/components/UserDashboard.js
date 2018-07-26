@@ -64,7 +64,7 @@ class UserDashboard extends React.Component {
           console.log(round);
           return (
             <div className="card" key={round.id}>
-              <p>{moment(round.playedOn).format('MMM Do YYYY')}</p>
+              <h5 className="card-header-title">{moment(round.playedOn).format('MMM Do YYYY')}</h5>
             </div>
           )
         }))
@@ -87,7 +87,7 @@ class UserDashboard extends React.Component {
             return (
               <div key={round.id} className="card">
                 <header className="card-header">
-                  <p className="card-header-title"> Hole No.{round.hole}</p>
+                  <h5 className="card-header-title"> Hole No.{round.hole}</h5>
                 </header>
                 <div className="card-content">
                   <p className="content">Par: {round.par}</p>
@@ -114,45 +114,44 @@ class UserDashboard extends React.Component {
   render() {
     return (
       <div className="content">
-      <section className="container">
-        <h3 className="title">Welcome to your Dashboard, {this.props.uid}!</h3>
-        <Link to="/">
-          <button className="button is-danger is-rounded is-outlined" onClick={this.toggleDashboard}>Sign out</button>
-        </Link>
-        <div className="section">
-          <div className="columns">
-            <div className="box column">
-            {!this.state.rounds.length && (
-              <div className="column">
-                <h3>You have no tracked rounds. Go play some golf!</h3>
-              </div>
-            )}
+        <section className="container">
+          <h3 className="title">Welcome to your Dashboard, {this.props.uid}!</h3>
+          <Link to="/">
+            <button className="button is-danger is-rounded is-outlined" onClick={this.toggleDashboard}>Sign out</button>
+          </Link>
+          <div className="section">
+            <div className="box columns">
+              {!this.state.rounds.length && (
+                <div className="column">
+                  <h3>You have no tracked rounds. Go play some golf!</h3>
+                </div>
+              )}
               {this.state.rounds.length && (
                 <div className="column">
                     <h4 className="content has-text-centered">Rounds Tracked</h4>
                   <article>{this.state.rounds}</article>
                 </div>
               )}
-              </div>
-              <div className="box column">
+              <div className="column">
                 <h4 className="content has-text-centered">Latest Notes</h4>
                 {this.state.roundWithHoles && (
                   <div>{this.state.roundWithHoles}</div>
                 )}
               </div>
-            <div className="column">
-              <button className="button is-rounded is-primary is-outlined" onClick={this.createNewRound}>Start New Round</button>
-              {this.state.showRoundTracker
-                && <RoundTracker  
-                  sendToParent={this.updatedShowRoundTracker}
-                  roundId={this.state.roundId}
-                  getRounds={this.getRounds}
-                  getHolesForRounds={this.getHolesForRounds}
-              />}
-            </div>    
-          </div>
-        </div> 
-      </section>
+              <div className="column">
+                <h4 className="content has-text-centered">Track Round</h4>
+                <button className="button is-rounded is-primary is-outlined" onClick={this.createNewRound}>Start New Round</button>
+                {this.state.showRoundTracker
+                  && <RoundTracker  
+                    sendToParent={this.updatedShowRoundTracker}
+                    roundId={this.state.roundId}
+                    getRounds={this.getRounds}
+                    getHolesForRounds={this.getHolesForRounds}
+                />}
+              </div>    
+            </div>
+          </div> 
+        </section>
       </div>
     )
   }

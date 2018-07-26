@@ -46,7 +46,7 @@ class App extends Component {
   render() {
     if (this.state.isLoggedIn) {
       return (
-        <div className="">
+        <div className="section is-paddingless">
           <Header />
           <UserDashboard
             uid={this.state.uid}
@@ -60,11 +60,6 @@ class App extends Component {
       <div>
         <Header />
         <div className="section is-paddingless">
-          <Route
-            exact path="/"
-            component={About} />
-        </div>
-        <div className="section">
           <form
             onSubmit={this.getUser}
             className="container">
@@ -83,8 +78,13 @@ class App extends Component {
                   </div>
                 </div>
               </div>
-          <button className="button is-primary is-rounded" type="submit">Login</button>
+            <button className="button is-primary is-rounded" type="submit">Login</button>
           </form>
+        </div>
+        <div className="section">
+          <Route
+            exact path="/"
+            component={About} />
         </div>
         <Footer />
       </div>
