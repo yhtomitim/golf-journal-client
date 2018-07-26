@@ -123,11 +123,6 @@ class UserDashboard extends React.Component {
                     getRounds={this.getRounds}
                 />}
               </div>    
-              {/* {!this.state.rounds.length && 
-                <div className="column">
-                  <h3>You have no tracked rounds. Go play some golf!</h3>
-                </div>
-              } */}
               {this.state.rounds.length
                 ? 
                 <div className="column">
