@@ -6,14 +6,11 @@ const About = () => {
       <article className="container">
         <h2 className="subtitle">Why Golf Journal?</h2>
         <p>
-          This web app will allow a golfer to take notes on his or her round.The golfer can select from nearby golf courses and retrieve relevant info on the selected course like if they have a driving range.
+          If you're anything like me when it comes to golf, you're terrible. You stop keeping score around hole 5 because you're already well on your way to a score in the low 100s. But, you also hit some great shots. Really good shots. Shots that make you keep coming back to the torture chamber that is a golf course. The thing is, the scorecard is only half of the story. If there was a way to both keep your score, and also take notes on each hole that could help you understand <strong>how</strong> you got that score and indentify trends for improvement.
         </p>
         <p>
-          Problem Solved with App: This app solves a problem for golfers who want a place to keep their score data and notes on how they achieved that score in one place.For instance, a score on a hole only tells part of the story— what if that double-bogey was the result of a penalty and a poor chip ? Leaving notes on how a golfer performs on each hole can dramatically improve the golfer’ s game round to round.
-        </p>
-        <p>
-          How it Solves this problem : Allows for a golfer to record their scores on a hole as well as notes on each shot or how they played the hole overall.These notes can be viewed later to help a golfer improve areas of their game round-to-round.
-        </p>
+          <strong>Golf Journal</strong> solves this problem for golfers who want a place to keep their score data and notes on how they achieved that score in one place. Golfers can enter the par score for a hole, their own score, and notes on their perfomance. Leaving notes on a performance on each hole can dramatically improve a golfer's game round-to-round.
+        </p> <br></br>
       </article>
     </main>
   )

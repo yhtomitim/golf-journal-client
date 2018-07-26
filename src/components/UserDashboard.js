@@ -9,26 +9,24 @@ class UserDashboard extends React.Component {
     this.state = {
       userId: '',
       rounds: [],
-      roundIds: [],
       isLoggedIn: false,
       showRoundTracker: false,
-      roundWithHoles: [],
-    }
+      holesForRound: [],
+    };
     this.createNewRound = this.createNewRound.bind(this);
     this.toggleDashboard = this.toggleDashboard.bind(this);
     this.getRounds = this.getRounds.bind(this);
     this.updatedShowRoundTracker = this.updatedShowRoundTracker.bind(this);
-    this.getHolesForRounds = this.getHolesForRounds.bind(this);
-    
-  }
+    this.getHolesForRound = this.getHolesForRound.bind(this);
+  };
 
   componentDidMount() {
     this.getRounds();
-   }
+  };
   
   updatedShowRoundTracker(childData) {
     this.setState({ showRoundTracker: childData });
-  }
+  };
   
   createNewRound(event) {
     event.preventDefault();
@@ -51,111 +49,103 @@ class UserDashboard extends React.Component {
           showRoundTracker: true
         })
       });
-  }
+  };
 
   getRounds() {
     const apiUrl = `https://golf-journal-server.herokuapp.com/api/v1/rounds/${this.props.userId}`;
     fetch(apiUrl)
       .then(Response => Response.json())
       .then(Response => {
-        const arr = [];
-        const rounds = Response.rounds.map(((round) => {
-          arr.push(round.id);
+        const rounds = Response.rounds.map(round => {
           console.log(round);
           return (
-            <div className="card" key={round.id}>
-              <p>{moment(round.playedOn).format('MMM Do YYYY')}</p>
+            <div onClick={() => this.getHolesForRound(round.id)} className="card" key={round.id}>
+              <h5 className="card-header-title">
+                <a>{moment(round.playedOn).format('MMM Do YYYY')}</a>
+              </h5>
             </div>
           )
-        }))
-        this.setState({
-          rounds,
-          selectedRound: Response.rounds[0],
-          roundIds: arr,
         });
-        this.getHolesForRounds(this.state.roundIds);
+        this.setState({ rounds });
       })
-  }
+  };
 
-  getHolesForRounds(arr) {
-    arr.forEach(roundId => {
-      const apiUrl = `https://golf-journal-server.herokuapp.com/api/v1/holes/${roundId}`;
-      fetch(apiUrl)
-        .then(res => res.json())
-        .then(res => {
-          const holes = res.holes.map(round => {
-            return (
-              <div key={round.id} className="card">
-                <header className="card-header">
-                  <p className="card-header-title"> Hole No.{round.hole}</p>
-                </header>
-                <div className="card-content">
-                  <p className="content">Par: {round.par}</p>
-                  <p className="content">Score: {round.score}</p>
-                  <p className="content">Notes: {round.notes}</p>
-                </div>
+  getHolesForRound(roundId) {
+    const apiUrl = `https://golf-journal-server.herokuapp.com/api/v1/holes/${roundId}`;
+    fetch(apiUrl)
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+        const holeCard = res.holes.map(hole => {
+          return (
+            <div key={hole.id} className="card">
+              <header className="card-header">
+                <h5 className="card-header-title"> Hole No.{hole.hole}</h5>
+              </header>
+              <div className="card-content">
+                <p className="content">Par: {hole.par}</p>
+                <p className="content">Score: {hole.score}</p>
+                <p className="content">Notes: {hole.notes}</p>
               </div>
-            )
-          })
-          this.setState({ roundWithHoles: holes })
+            </div>
+          )
         });
-    })
-  }
+        this.setState({ holesForRound: holeCard });
+      });
+  };
 
-   toggleDashboard() {
-     this.setState({ isLoggedIn: !this.state.isLoggedIn });
-     this.sendToParent(this.state.isLoggedIn);
-   }
+  toggleDashboard() {
+    this.setState({ isLoggedIn: !this.state.isLoggedIn });
+    this.sendToParent(this.state.isLoggedIn);
+  };
   
   sendToParent(loggedInState) {
     this.props.sendToParent(loggedInState);
-  }
+  };
   
   render() {
     return (
       <div className="content">
-      <section className="container">
-        <h3 className="title">Welcome to your Dashboard, {this.props.uid}!</h3>
-        <Link to="/">
-          <button className="button is-danger is-rounded is-outlined" onClick={this.toggleDashboard}>Sign out</button>
-        </Link>
-        <div className="section">
-          <div className="columns">
-            <div className="box column">
-            {!this.state.rounds.length && (
+        <section className="container">
+          <h3 className="title">Welcome to your Dashboard, {this.props.uid}!</h3>
+          <Link to="/">
+            <button className="button is-danger is-rounded is-outlined" onClick={this.toggleDashboard}>Sign out</button>
+          </Link>
+          <div className="section">
+            <div className="box columns">
               <div className="column">
-                <h3>You have no tracked rounds. Go play some golf!</h3>
-              </div>
-            )}
-              {this.state.rounds.length && (
+                <h4 className="content has-text-centered">Track Round</h4>
+                <button className="button is-rounded is-primary is-outlined" onClick={this.createNewRound}>Start New Round</button>
+                {this.state.showRoundTracker
+                  && <RoundTracker  
+                    sendToParent={this.updatedShowRoundTracker}
+                    roundId={this.state.roundId}
+                    getRounds={this.getRounds}
+                />}
+              </div>    
+              {this.state.rounds.length
+                ? 
                 <div className="column">
                     <h4 className="content has-text-centered">Rounds Tracked</h4>
                   <article>{this.state.rounds}</article>
                 </div>
-              )}
+                :
+                <div className="column">
+                  <h3>You have no tracked rounds. Go play some golf!</h3>
+                </div>
+              }
+              <div className="column">
+                <h4 className="content has-text-centered">Round Review</h4>
+                {this.state.holesForRound && 
+                  <div>{this.state.holesForRound}</div>
+                }
               </div>
-              <div className="box column">
-                <h4 className="content has-text-centered">Latest Notes</h4>
-                {this.state.roundWithHoles && (
-                  <div>{this.state.roundWithHoles}</div>
-                )}
-              </div>
-            <div className="column">
-              <button className="button is-rounded is-primary is-outlined" onClick={this.createNewRound}>Start New Round</button>
-              {this.state.showRoundTracker
-                && <RoundTracker  
-                  sendToParent={this.updatedShowRoundTracker}
-                  roundId={this.state.roundId}
-                  getRounds={this.getRounds}
-                  getHolesForRounds={this.getHolesForRounds}
-              />}
-            </div>    
-          </div>
-        </div> 
-      </section>
+            </div>
+          </div> 
+        </section>
       </div>
     )
-  }
-}
+  };
+};
 
 export default UserDashboard;

@@ -4,7 +4,7 @@ class RoundTracker extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hole: '1',
+      hole: '',
       par: '',
       score: '',
       notes: '',
@@ -14,11 +14,11 @@ class RoundTracker extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.saveHole = this.saveHole.bind(this);
     this.toggleRoundTracker = this.toggleRoundTracker.bind(this);
-  }
+  };
 
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
-  }
+  };
 
   saveHole(event) {
     event.preventDefault();
@@ -38,14 +38,19 @@ class RoundTracker extends React.Component {
       body: JSON.stringify(data),
     })
       .then(res => res.json())
-      .then(res => console.log(res))
-  }
+      .then(res => console.log(res));
+    this.setState({
+      hole: '',
+      par: '',
+      score: '',
+      notes: '',
+    })
+  };
   
   toggleRoundTracker() {
     this.setState({ roundComplete: !this.state.roundComplete });
     this.sendToParent(this.state.roundComplete);
     this.props.getRounds();
-    this.props.getHolesForRounds([7]);
   };
 
     sendToParent(roundComplete) {
@@ -61,7 +66,7 @@ class RoundTracker extends React.Component {
             htmlFor="hole">Select hole:
           </label>
           <div className="control">
-            <div className="select">
+            <div className="select is-primary is-rounded">
               <select
                 name="hole"
                 value={this.state.hole}
@@ -125,7 +130,7 @@ class RoundTracker extends React.Component {
           </label>
           <div className="control">
             <textarea
-              className="textarea"
+              className="textarea is-primary is-rounded"
               name="notes"
               placeholder="enter notes"
               value={this.state.notes}
@@ -135,20 +140,20 @@ class RoundTracker extends React.Component {
         <div className="field is-grouped">
           <div className="control">
             <button
-              className="button is-primary"
+              className="button is-primary is-rounded"
               type="submit">Save Hole
             </button>
           </div>
           <div className="control">
             <button
-              className="button is-success"
+              className="button is-success is-rounded"
               onClick={this.toggleRoundTracker}>Finish Round
             </button>
           </div>
         </div>
       </form>
     )
-  }
-}
+  };
+};
 
 export default RoundTracker;
